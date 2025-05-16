@@ -35,17 +35,34 @@
                 </a>
             </li>
         </ul>
-        <p class="copy text-center">&copy; 2025 Ichwal.</p>
+        <footer class="">
+            <p class="copy text-center m-0">&copy; 2025 Ichwal.</p>
+            <div class="container d-flex justify-content-center">
+                <a href="https://github.com/ichwalM" target="_blank" class="btn fs-5">
+                    <i class="bi bi-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ichwal/" class="btn fs-5" target="_blank">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+            </div>
+        </footer>
     </div>
-
     <!-- Main Content -->
     <div class="main-content">
         <div class="container-fluid">
             <!-- Header -->
             <div class="row mb-4">
                 <div class="col-12">
-                    <h2 class="mb-1">Dashboard</h2>
-                    <p class="text-muted">Selamat datang, <span id="userFullName">User</span>!</p>
+                    <div class="container p-0 d-flex justify-content-between">
+                        <div class="container">
+                        <h2 class="mb-1">Dashboard</h2>
+                        <p class="">Selamat datang, <span class="text-info" id="userFullName">User</span>!</p>
+                        </div>
+                        <div class="form-check form-switch ms-auto">
+                            <input class="form-check-input dark" type="checkbox" role="switch" id="darkModeToggle">
+                            <label class="form-check-label dark" for="darkModeToggle"><i class="bi bi-moon-stars-fill"></i> <i class="bi bi-sun-fill"></i></label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -104,7 +121,7 @@
                 </div>
             </div>
 
-            <!-- Recent Transactions -->
+            <!-- for Transactions -->
             <div class="row">
                 <div class="col-12">
                     <div class="card">

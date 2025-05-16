@@ -1,6 +1,6 @@
 :root {
     --sidebar-width: 250px;
-    --primary-color: #3a86ff;
+    /* --primary-color: #3a86ff; */
     --primary-dark: #2a75ee;
     --success-color: #4CAF50;
     --danger-color: #F44336;
@@ -21,7 +21,6 @@ body {
     left: 0;
     width: var(--sidebar-width);
     height: 100vh;
-    background-color: #ffffff;
     border-right: 1px solid #e5e5e5;
     padding: 20px 0;
     z-index: 1000;
@@ -60,7 +59,6 @@ body {
 
 .sidebar-menu a:hover, .sidebar-menu a.active {
     background-color: rgba(58, 134, 255, 0.1);
-    color: var(--primary-color);
 }
 
 .sidebar-menu i {
@@ -190,4 +188,49 @@ body {
     .main-content.active {
         margin-left: var(--sidebar-width);
     }
+}
+/* dark Mode code */
+body.dark-mode {
+    background-color: #212529;
+    color: #f8f9fa;
+}
+
+.sidebar.sidebar-light.bg-light.dark-mode {
+    background-color: #343a40 !important; 
+}
+
+.sidebar.sidebar-light.bg-light.dark-mode .sidebar-brand,
+.sidebar.sidebar-light.bg-light.dark-mode .nav-link {
+    color: #f8f9fa !important;
+}
+
+.btn-primary.dark-mode {
+    background-color: hsl(208, 7%, 46%) !important; 
+    border-color: #6c757d !important;
+    color: #fff !important;
+}
+
+.btn-primary.dark-mode:hover {
+    background-color: #5a6268 !important;
+    border-color: #5a6268 !important;
+}
+
+.form-check-label i.bi-moon-stars-fill {
+    color: #343a40;
+}
+.dark{
+    cursor: pointer;
+}
+
+.form-check-label i.bi-sun-fill {
+    color: #ffc107; 
+    display: none;
+}
+
+body.dark-mode .form-check-label i.bi-moon-stars-fill {
+    display: none;
+}
+
+body.dark-mode .form-check-label i.bi-sun-fill {
+    display: inline-block;
 }

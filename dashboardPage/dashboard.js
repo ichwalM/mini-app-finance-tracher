@@ -1,3 +1,24 @@
+//dark mode
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+
+if (isDarkMode) {
+    cardDarkMode.classList.add('dark-mode');
+    body.classList.add('dark-mode');
+    darkModeToggle.checked = true;
+}
+
+darkModeToggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+
+    if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        localStorage.removeItem('darkMode');
+    }
+});
+
 // Cek login
 document.addEventListener('DOMContentLoaded', function() {
     const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
