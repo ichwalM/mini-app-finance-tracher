@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi - Personal Finance Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="transaction.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2>Finance Tracker</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="../dashboardPage/Dashboard.html">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="TransactionPage.html" class="active">
+                    <i class="bi bi-cash-coin"></i>
+                    <span>Transaksi</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="mb-1">Kelola Transaksi</h2>
+                    <p class="text-muted">Tambah dan lihat riwayat transaksi Anda</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title mb-0">Tambah Transaksi Baru</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="transaction-type-toggle d-flex justify-content-between">
+                                <button class="btn btn-outline-success active" id="incomeBtn">
+                                    <i class="bi bi-graph-up-arrow"></i> Pemasukan
+                                </button>
+                                <button class="btn btn-outline-danger" id="expenseBtn">
+                                    <i class="bi bi-graph-down-arrow"></i> Pengeluaran
+                                </button>
+                            </div>
+
+                            <form id="transactionForm">
+                                <input type="hidden" id="transactionType" value="income">
+                                
+                                <div class="mb-3">
+                                    <label for="amount" class="form-label">Jumlah (Rp)</label>
+                                    <input type="number" class="form-control" id="amount" required min="1">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="category" class="form-label">Kategori</label>
+                                    <select class="form-select" id="category" required>
+                                        <option value="" disabled selected>Pilih Kategori</option>
+                                        <optgroup label="Pemasukan" id="incomeCategories">
+                                            <option value="Gaji">Gaji</option>
+                                            <option value="Bisnis">Bisnis</option>
+                                            <option value="Investasi">Investasi</option>
+                                            <option value="Hadiah">Hadiah</option>
+                                            <option value="Lainnya">Lainnya</option>
+                                        </optgroup>
+                                        <optgroup label="Pengeluaran" id="expenseCategories" style="display:none;">
+                                            <option value="Makanan & Minuman">Makanan & Minuman</option>
+                                            <option value="Transportasi">Transportasi</option>
+                                            <option value="Belanja">Belanja</option>
+                                            <option value="Tagihan">Tagihan</option>
+                                            <option value="Hiburan">Hiburan</option>
+                                            <option value="Kesehatan">Kesehatan</option>
+                                            <option value="Pendidikan">Pendidikan</option>
+                                            <option value="Lainnya">Lainnya</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="date" class="form-label">Tanggal</label>
+                                    <input type="date" class="form-control" id="date" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Deskripsi</label>
+                                    <textarea class="form-control" id="description" rows="3"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary w-100">Simpan Transaksi</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabel Transaksi -->
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">Riwayat Transaksi</h5>
+                            <div class="d-flex">
+                                <input type="month" class="form-control me-2" id="monthFilter" style="max-width: 200px;">
+                                <select class="form-select me-2" id="typeFilter" style="max-width: 150px;">
+                                    <option value="all">Semua Tipe</option>
+                                    <option value="income">Pemasukan</option>
+                                    <option value="expense">Pengeluaran</option>
+                                </select>
+                                <button class="btn btn-sm btn-outline-secondary" id="resetFilterBtn">
+                                    <i class="bi bi-x-circle"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="transaction-table">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Kategori</th>
+                                            <th scope="col">Deskripsi</th>
+                                            <th scope="col">Tipe</th>
+                                            <th scope="col">Jumlah</th>
+                                            <th scope="col">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transactionsTable">
+                                        <tr>
+                                            <td colspan="6" class="text-center">Belum ada transaksi</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Hapus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus transaksi ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="transaction.js"></script>
+</body>
+</html>
